@@ -1,1 +1,27 @@
 {% extends 'lotification/base.html'%}
+{% load static %}
+
+{% block content %}
+    <div class="main_section_new">
+        <div class="img_container">
+            <figure>
+                <img src="{% static '/img/logo_sin_fondo.png' %}" alt="">
+            </figure>
+
+        </div>
+        <div class="form_container">
+            <h5>Nuevo Cliente</h5>
+            <form action="">
+                <div class="mb-3">
+                    
+                    <input type="nombre" class="form-control" id="customer_name" placeholder="Nombre de usuario">
+                    <input type="apellido" class="form-control" id="customer_lastname" placeholder="Apellido ">
+                    <input type="numero" class="form-control" id="customer_phone" placeholder="Numero de telefono">
+                    <button type="button" class="btn btn-outline-success">Crear</button>  
+                </div>
+                  
+            </form>
+            <a href="home" class="btn btn-outline-danger">Cancelar</a>
+        </div>
+    </div>
+{% endblock %}
