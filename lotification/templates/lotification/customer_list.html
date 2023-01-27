@@ -1,0 +1,50 @@
+{% extends 'lotification/base.html'%}
+
+
+{% block content %}
+<div class="section_bottom">
+    <div class="title">
+        <h5>Clientes:</h5>
+    </div>
+    <div class="form_section">
+        <form action="">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">ID</span>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+        </form>
+    </div>
+    <div class="table_section">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    
+</div>
+{% endblock %}
