@@ -10,6 +10,6 @@ urlpatterns = [
     path("lote", views.lote_list),
     path("lote_info", views.lote_info),
     path("nuevo_lote", views.new_lote),
-    path("new_client", views.new_client),
+    path("nuevo_cliente", views.new_client),
     
 ]
