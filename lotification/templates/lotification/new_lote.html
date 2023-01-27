@@ -1,1 +1,31 @@
+
 {% extends 'lotification/base.html'%}
+{% load static %}
+
+{% block content %}
+    <div class="main_section_new">
+        <div class="img_container">
+            <figure>
+                <img src="{% static '/img/logo_sin_fondo.png' %}" alt="">
+            </figure>
+
+        </div>
+        <div class="form_container">
+            <h5>Nuevo Lote</h5>
+            <form action="">
+                <div class="mb-3">
+                    <div class="dimensiones">
+                        <input  class="form-control" id="lote_largo" placeholder="largo">
+                        <input  class="form-control" id="lote_ancho" placeholder="Ancho">
+                    </div>
+                    <input  class="form-control" id="lote_price" placeholder="Precio">
+                    <input  class="form-control" id="lote_disponibiliad" placeholder="Disponibilidad ">
+                    
+                    <button type="button" class="btn btn-outline-success">Crear</button>  
+                </div>
+                  
+            </form>
+            <a href="home" class="btn btn-outline-danger">Cancelar</a>
+        </div>
+    </div>
+{% endblock %}

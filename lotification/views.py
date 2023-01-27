@@ -14,10 +14,13 @@ def customers_list(request):
     return render(request, 'lotification/customer_list.html')
 
 def lote_list(request):
-    return render(request, 'lotification/lote_list.html')
+    lotes = Lote.objects.all()
+    return render(request, 'lotification/lote_list.html',{'lotes':lotes})
 
-def lote_info(request):
-    return render(request, 'lotification/lote_info')
+def lote_info(request,pk):
+    lote = Lote.objects.get(id=pk)
+    context = {'lote':lote}
+    return render(request, 'lotification/lote_info.html',context)
 
 def new_lote(request):
     return render(request,'lotification/new_lote.html')

@@ -169,3 +169,8 @@ input{
     width: 200px;
     
 }
+.dimensiones {
+    display: flex;
+    flex-direction: row;
+    width: 360px;
+}
