@@ -7,18 +7,46 @@
         </div>
         <div>
             <div class="lote_info_context">
-                <p><strong>Dimensiones:</strong> {{lote.longitud}}m x {{lote.ancho}}m</p>
-                <p><strong>Area:</strong> {{lote.longitud}}m x {{lote.ancho}}m</p>
-                <p><strong>Precio:</strong> ${{lote.precio}}</p>
-                <p><strong>Disponibilidad:</strong>: {{lote.estado}}</p>
+                <p><strong>Dimensiones:</strong> {{lote.pot_large}}m x {{lote.pot_width}}m</p>
+                <p><strong>Area:</strong> {{lote.pot_large}}m x {{lote.pot_large}}m</p>
+                <p><strong>Precio:</strong> ${{lote.pot_price}}</p>
+                <p><strong>Disponibilidad:</strong>: {{lote.pot_dispo}}</p>
             </div>
             <div class="lote_info_context">
-                <p><strong>Comprador:</strong> {{lote.comprador}}</p>
-                <p><strong>Vendedor:</strong> {{lote.vendedor}}</p>
+                <p><strong>Comprador:</strong> {{lote.pot_owner}}</p>
+                <!-- <p><strong>Vendedor:</strong> {{lote.vendedor}}</p> -->
                 <p><strong>Fecha de compra:</strong> </p>
                 <p><strong>Saldo:</strong>: </p>
+                <p><strong>Saldo:</strong>:{{transactions}} </p>
             </div>
         </div>
     </div>
-    <a href="{% url 'home' %}" class="btn btn-outline-danger">Volver</a>
+    <div>
+    </div>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID Pago</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Fecha</th>
+            <!-- <th scope="col">Vendedor</th> -->
+          </tr>
+        </thead>
+        <tbody>
+
+        
+          {% for pago in pagos %}
+          <tr>
+          <th scope="row"><a href="lote_info/{{pago.id}}">{{pago.id}}</a></th>
+          <td>{{pago.Payment_amount}}</td>
+          <td>{{pago.Payment_date}}</td>
+          </tr>
+          
+          {% endfor %}
+        </tbody>
+        
+
+      </table>
+    <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
 {% endblock %}

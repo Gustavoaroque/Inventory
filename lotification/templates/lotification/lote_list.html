@@ -15,7 +15,7 @@
             <th scope="col">Precio</th>
             <th scope="col">Estado</th>
             <th scope="col">Comprador</th>
-            <th scope="col">Vendedor</th>
+            <!-- <th scope="col">Vendedor</th> -->
           </tr>
         </thead>
         <tbody>
@@ -24,12 +24,12 @@
           {% for i in lotes %}
           <tr>
           <th scope="row"><a href="lote_info/{{i.id}}">{{i.id}}</a></th>
-          <td>{{i.longitud}}</td>
-          <td>{{i.ancho}}</td>
-          <td>{{i.precio}}</td>
-          <td>{{i.estado}}</td>
-          <td>{{i.comprador}}</td>
-          <td>{{i.vendedor}}</td>
+          <td>{{i.pot_large}}</td>
+          <td>{{i.pot_width}}</td>
+          <td>{{i.pot_price}}</td>
+          <td>{{i.pot_dispo}}</td>
+          <td>{{i.pot_owner}}</td>
+
           </tr>
           
           {% endfor %}
@@ -38,7 +38,7 @@
 
       </table>
       <div class="btn_section">
-        <a href="lote" class="btn btn-outline-info">Ver mas</a>
+        <a href="home" class="btn btn-outline-danger">Volver</a>
         <a href="nuevo_lote" class="btn btn-outline-info">Nuevo</a>
         <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
       </div>
