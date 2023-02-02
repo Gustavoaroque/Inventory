@@ -12,16 +12,18 @@
         </div>
         <div class="form_container">
             <h5>Nuevo Lote</h5>
-            <form action="">
-                <div class="mb-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <!-- <div class="mb-3">
                     <div class="dimensiones">
                         <input  class="form-control" id="lote_largo" placeholder="largo">
                         <input  class="form-control" id="lote_ancho" placeholder="Ancho">
                     </div>
                     <input  class="form-control" id="lote_price" placeholder="Precio">
                     <input  class="form-control" id="lote_disponibiliad" placeholder="Disponibilidad ">
-                    
-                    <button type="button" class="btn btn-outline-success">Crear</button>  
+                     -->
+                    <button type="submit" class="btn btn-outline-success">Crear</button>  
                 </div>
                   
             </form>

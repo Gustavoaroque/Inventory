@@ -6,7 +6,7 @@ from django.urls import path, include
 urlpatterns = [
     path("home", views.home,name="home"),
     path("user_list", views.user_list),
-    path("clientes",views.customers_list,name='lients'),
+    path("clientes",views.customers_list,name='clients'),
     path("lote", views.lote_list,name="lote"),
     path("lote_info/<str:pk>/", views.lote_info),
     path("nuevo_lote", views.new_lote),

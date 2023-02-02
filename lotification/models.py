@@ -40,8 +40,11 @@ class Pots(models.Model):
     pot_price = models.FloatField()
     pot_dispo = models.CharField(max_length=20,choices=options, default="Disponible")
     pot_owner = models.ForeignKey(Clients, null=True,blank=True, on_delete=models.CASCADE)
-
+    def __str__(self):
+        return str(self.id)
 class Payments(models.Model):
     Payment_amount = models.FloatField()
     Payment_date = models.DateField(auto_now_add=True)
     Payment_Pot = models.ForeignKey(Pots,null=True,on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.id)

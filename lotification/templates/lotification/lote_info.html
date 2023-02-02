@@ -48,5 +48,11 @@
         
 
       </table>
+      <form action="" method="post">
+        {% csrf_token %}
+        {{form_payment}}
+        <button type="submit">Crear</button>
+      </form>
+
     <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
 {% endblock %}

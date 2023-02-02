@@ -174,3 +174,16 @@ input{
     flex-direction: row;
     width: 360px;
 }
+.lote_info_context{
+    display: flex;
+    justify-content: space-around;
+
+    /* flex-direction: row; */
+}
+
+.card_info{
+    width: 1200px;
+    margin-left:auto ;
+    margin-right: auto;
+
+}
