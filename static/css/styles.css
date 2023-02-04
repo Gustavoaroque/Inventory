@@ -171,9 +171,14 @@ input{
     
 }
 .dimensiones {
+    background-color: aqua;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     width: 360px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .lote_info_context{
     display: flex;
@@ -201,6 +206,21 @@ input{
     justify-content: center;
     align-items: center;
 }
-#id_Payment_Pot{
-    
+input {
+    margin-top:5px ;
+}
+
+#id_pot_large, #id_pot_width{
+    width: 153px;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+#id_Payment_Pot {
+    display: none;
+}
+.pay_div{
+    width: 50%;
+    margin-left: auto;
+    margin-right:auto;
 }

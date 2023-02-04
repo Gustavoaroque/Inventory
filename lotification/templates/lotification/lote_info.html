@@ -1,5 +1,5 @@
 {% extends 'lotification/base.html'%}
-
+{% load widget_tweaks %}
 {% block content %}
     <div class="card_info">
         <div class="title_card_info">
@@ -48,11 +48,15 @@
         
 
       </table>
-      <form action="" method="post">
-        {% csrf_token %}
-        {{form_payment}}
-        <button type="submit">Crear</button>
-      </form>
+      <div class="pay_div">
+
+        <form action="" method="post">
+          {% csrf_token %}
+          {% render_field form_payment.Payment_amount class="form-control" placeholder="Cantidad"%}
+          {% render_field form_payment.Payment_Pot class="form-control"%}
+          <button type="submit">Crear</button>
+        </form>
+      </div>
 
     <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
 {% endblock %}

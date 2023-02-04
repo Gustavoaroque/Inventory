@@ -11,5 +11,7 @@ urlpatterns = [
     path("lote_info/<str:pk>/", views.lote_info),
     path("nuevo_lote", views.new_lote),
     path("nuevo_cliente", views.new_client),
+    path("login",views.login, name="login"),
+    path("register", views.register, name="register")
     
 ]

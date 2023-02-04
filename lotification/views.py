@@ -4,6 +4,7 @@ from .models import *
 from .forms  import *
 from django.db import connection
 from .filters import *
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def home(request):
@@ -77,6 +78,19 @@ def new_client(request):
     context = {'form':form}
     return render(request,'lotification/new_client.html',context)
 
+
+def login(request):
+    return render(request, 'lotification/login.html')
+
+def register(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form':form}
+    return render(request, 'lotification/register.html',context)
 
 # def list(request):
 #     lotes = Lote.objects.all()
