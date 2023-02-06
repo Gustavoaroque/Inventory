@@ -1,19 +1,38 @@
 {% extends 'lotification/base.html'%}
+{% load widget_tweaks %}
 {% load static %}
 
 {% block content %}
     <div class="main_section_new">
         <div class="img_container">
-            <figure>
+            <figure class="figure_new">
                 <img src="{% static '/img/logo_sin_fondo.png' %}" alt="">
             </figure>
 
         </div>
         <div class="form_container">
             <h5>Nuevo Cliente</h5>
-            <form action="" method="post">
+            <form action="" method="post" class="form_new_client">
                 {% csrf_token %}
-                {{form}}
+                <div class="inputs_form">
+                    {% render_field form.client_name class="form-control" placeholder="Nombre" %}
+                    
+                </div>
+                <div class="inputs_form">
+                    
+                    {% render_field form.client_last_name class="form-control" placeholder="Apellido" %}
+                </div>
+                <div class="inputs_form">
+                    
+                    {% render_field form.client_phone class="form-control" placeholder="Telefono" %}
+                </div>
+                <div class="inputs_form">
+                    
+                    {% render_field form.client_direction class="form-control" placeholder="Direccion" %}
+                </div>
+
+                <!-- {% render_field form.client_name class="form-control" placeholder="Nombre" %} -->
+                <!-- {{form}} -->
                 <!-- <div class="mb-3">
                     
                     <input type="nombre" class="form-control" id="customer_name" placeholder="Nombre de usuario">
@@ -21,7 +40,10 @@
                     <input type="numero" class="form-control" id="customer_phone" placeholder="Numero de telefono">
                     <button type="button" class="btn btn-outline-success">Crear</button>  
                 </div> -->
-                  <button type="submit">Crear</button>
+                <div class="btn_div_sect">
+
+                    <button type="submit" class="btn btn-outline-info">Crear</button>
+                </div>
             </form>
             <a href="home" class="btn btn-outline-danger">Cancelar</a>
         </div>

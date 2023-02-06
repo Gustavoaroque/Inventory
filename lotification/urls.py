@@ -12,6 +12,7 @@ urlpatterns = [
     path("nuevo_lote", views.new_lote),
     path("nuevo_cliente", views.new_client),
     path("login",views.login, name="login"),
-    path("register", views.register, name="register")
+    path("register", views.register, name="register"),
+    path("lote_info/<str:pk>/gen/",views.gen_EXCEL)
     
 ]

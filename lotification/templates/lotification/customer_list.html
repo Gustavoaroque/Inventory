@@ -1,18 +1,28 @@
 {% extends 'lotification/base.html'%}
-
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="section_bottom">
     <div class="title">
         <h5>Clientes:</h5>
     </div>
+
+
+    <div class="filter_sect">
+      <form action="" method="get">
+  
+        {{filtro.form}}
+        <button class="btn btn-primary" type="submit" > Buscar</button>
+      </form>
+    </div>
+<!--     
     <div class="form_section">
         <form action="">
             <div class="input-label">
                 <input class="form-control" id="customer_id" placeholder="Buscar por ID">
             </div>
         </form>
-    </div>
+    </div> -->
     <div class="table_section">
         <table class="table">
             <thead>

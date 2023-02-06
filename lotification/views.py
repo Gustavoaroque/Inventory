@@ -5,14 +5,21 @@ from .forms  import *
 from django.db import connection
 from .filters import *
 from django.contrib.auth.forms import UserCreationForm
+import django_excel as excel
+from datetime import datetime
+from openpyxl import Workbook
+from django.http.response  import HttpResponse
+
 
 # Create your views here.
 def home(request):
-    lotes = Pots.objects.all()
-    clients = Clients.objects.all()
-
+    clients = Clients.objects.raw('SELECT * FROM lotification_Clients LIMIT 5')
     clients_count = Clients.objects.all().count()
+
+    lotes = Pots.objects.raw('SELECT * FROM lotification_Pots LIMIT 5')
     pots_count = Pots.objects.all().count()
+
+    
     context = {'lotes':lotes,'clients':clients,'numero_clientes':clients_count,'numero_lotes':pots_count}   
     return render(request, 'lotification/home.html',context)
 
@@ -23,7 +30,11 @@ def user_list(request):
 
 def customers_list(request):
     clients = Clients.objects.all()
-    context = {'clients':clients}
+    
+    cliente_filtrado = ClientFilter(request.GET, queryset=clients)
+    clients = cliente_filtrado.qs
+    print(cliente_filtrado)
+    context = {'clients':clients,'filtro':cliente_filtrado}
     return render(request, 'lotification/customer_list.html',context)
 
 def lote_list(request):
@@ -36,6 +47,7 @@ def lote_list(request):
     return render(request, 'lotification/lote_list.html',context)
 
 def lote_info(request,pk):
+
     cursor = Pots.objects.get(id = pk)
     form = PaymentForm(initial={'Payment_Pot':cursor})
     # pass
@@ -46,14 +58,32 @@ def lote_info(request,pk):
    
     all_Pots = Pots.objects.all()
     # x = cursor.payments_set.all()
+
     pagos = Payments.objects.filter(Payment_Pot = cursor.id)
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/lote')
-    context = {'lote':cursor, 'pagos':pagos,'form_payment':form}
+    area = cursor.pot_large * cursor.pot_width
+    # params = {'area:'}
+    abono_total = 0
+
+    if pagos:
+        for pago in pagos:
+            abono_total +=pago.Payment_amount
+            print(pago.Payment_amount)
+    else:
+        print('No hay pagos')
+
+    print(str(abono_total))
+    restante = cursor.pot_price - abono_total
+    context = {'lote':cursor, 'pagos':pagos,'form_payment':form, 'area':area, 'abono':abono_total, 'restante':restante,'id_pot':pk}
+
     return render(request, 'lotification/lote_info.html',context)
+
+
+
 
 def new_lote(request):
     form = PotForm()
@@ -99,5 +129,32 @@ def register(request):
 
 
 
+def gen_EXCEL(request, pk):
+    cursor = Pots.objects.get(id = pk)
+    pagos = Payments.objects.filter(Payment_Pot = cursor.id)
+    wb = Workbook()
+    ws = wb.active
+    ws['B1'] = "Reporte pagos"
+    ws.merge_cells('B1:D1')
+    ws['B3'] = 'ID de Pago'
+    ws['C3'] = 'Monto ($)'
+    ws['D3'] = 'Fecha'
+    contador = 4
+    for pago in pagos:
+        ws.cell(row = contador, column = 2).value = pago.id
+        ws.cell(row = contador, column = 3).value = pago.Payment_amount
+        ws.cell(row = contador, column = 4).value = "{0:%d-%m-%Y}".format(pago.Payment_date)
+        contador+=1
+    today = datetime.now()
+    strToday = today.strftime("%Y%m%d")
+    nombre_archivo = "Reporte_pagos_Lote"+str(cursor.id)+ strToday+".xlsx"
+    response = HttpResponse(content_type="application/ms-excel")
+    content = "attachment; filename = {0}".format(nombre_archivo)
+    response['Content-Disposition']=content
+    wb.save(response)
+    return response 
 
-
+    # sheet = excel.pe.Sheet(export)
+    # sheet.group_rows_by_column(0)
+    # print(export)
+    # return excel.make_response(sheet,"csv",file_name="results de pago-"+strToday+".csv")

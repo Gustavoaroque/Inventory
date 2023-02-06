@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'lotification',
     'django_filters',
     'widget_tweaks',
+    'django_excel'
 ]
 
 MIDDLEWARE = [

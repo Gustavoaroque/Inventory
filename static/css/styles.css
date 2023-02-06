@@ -171,7 +171,7 @@ input{
     
 }
 .dimensiones {
-    background-color: aqua;
+   
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -220,7 +220,28 @@ input {
     display: none;
 }
 .pay_div{
-    width: 50%;
+    width: 20%;
     margin-left: auto;
     margin-right:auto;
+}
+.btn_div_sect{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+table_div_pot{
+    width: 1200px;
+}
+.inputs_form{
+    margin-top: 8px;
+}
+
+.figure_new {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 300px;
 }

@@ -8,7 +8,7 @@
         <div>
             <div class="lote_info_context">
                 <p><strong>Dimensiones:</strong> {{lote.pot_large}}m x {{lote.pot_width}}m</p>
-                <p><strong>Area:</strong> {{lote.pot_large}}m x {{lote.pot_large}}m</p>
+                <p><strong>Area:</strong> {{area}}m2</p>
                 <p><strong>Precio:</strong> ${{lote.pot_price}}</p>
                 <p><strong>Disponibilidad:</strong>: {{lote.pot_dispo}}</p>
             </div>
@@ -16,47 +16,65 @@
                 <p><strong>Comprador:</strong> {{lote.pot_owner}}</p>
                 <!-- <p><strong>Vendedor:</strong> {{lote.vendedor}}</p> -->
                 <p><strong>Fecha de compra:</strong> </p>
-                <p><strong>Saldo:</strong>: </p>
+                <p><strong>Saldo:</strong>:$ {{restante}} </p>
                 <p><strong>Saldo:</strong>:{{transactions}} </p>
             </div>
         </div>
     </div>
     <div>
     </div>
+<div class="table_div_pot">
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID Pago</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Fecha</th>
-            <!-- <th scope="col">Vendedor</th> -->
-          </tr>
-        </thead>
-        <tbody>
-
-        
-          {% for pago in pagos %}
-          <tr>
-          <th scope="row"><a href="lote_info/{{pago.id}}">{{pago.id}}</a></th>
-          <td>{{pago.Payment_amount}}</td>
-          <td>{{pago.Payment_date}}</td>
-          </tr>
-          
-          {% endfor %}
-        </tbody>
-        
-
-      </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID Pago</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Fecha</th>
+        <!-- <th scope="col">Vendedor</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      
+      
+      {% for pago in pagos %}
+      <tr>
+        <th scope="row"><a href="lote_info/{{pago.id}}">{{pago.id}}</a></th>
+        <td>$ {{pago.Payment_amount}}</td>
+        <td>{{pago.Payment_date}}</td>
+      </tr>
+      
+      {% endfor %}
+    </tbody>
+    
+    
+  </table>
+  <div class="btn_div_sect">
+    <a href="/lote_info/{{id_pot}}/gen" class="btn btn-outline-info" >Exportar </a>
+  </div>
+</div>
       <div class="pay_div">
 
         <form action="" method="post">
           {% csrf_token %}
-          {% render_field form_payment.Payment_amount class="form-control" placeholder="Cantidad"%}
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">$</span>
+            {% render_field form_payment.Payment_amount class="form-control" placeholder="Cantidad"%}
+
+            <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"> -->
+          </div>
+          
+          <!-- <span class="input-group-text" id="id_Payment_amount">$</span> -->
           {% render_field form_payment.Payment_Pot class="form-control"%}
-          <button type="submit">Crear</button>
+          <div class="btn_div_sect">
+            
+            <button type="submit" class="btn btn-outline-info">Crear</button>
+          </div>
         </form>
       </div>
+      <div class="btn_div_sect">
 
-    <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
+        <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
+      </div>
+
 {% endblock %}
