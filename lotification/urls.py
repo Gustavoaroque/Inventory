@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from wkhtmltopdf.views import PDFTemplateView
 from django.urls import path, include
 
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
     path("nuevo_cliente", views.new_client),
     path("login",views.login, name="login"),
     path("register", views.register, name="register"),
-    path("lote_info/<str:pk>/gen/",views.gen_EXCEL)
-    
+    path("lote_info/<str:pk>/gen/",views.gen_EXCEL),
+    path("lote_info/<str:pk>/cotizacion",views.pdf_report, name='pdf_report')
 ]

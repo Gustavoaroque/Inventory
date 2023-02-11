@@ -9,6 +9,11 @@ import django_excel as excel
 from datetime import datetime
 from openpyxl import Workbook
 from django.http.response  import HttpResponse
+from io import BytesIO
+# from reportlab.lib.pagesizes import A4, cm
+from reportlab.pdfgen import canvas
+from django.http import FileResponse
+from django.conf import settings
 
 
 # Create your views here.
@@ -158,3 +163,21 @@ def gen_EXCEL(request, pk):
     # sheet.group_rows_by_column(0)
     # print(export)
     # return excel.make_response(sheet,"csv",file_name="results de pago-"+strToday+".csv")
+
+
+def pdf_report(request, pk):
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer)
+    p.drawString(100,100,'Hello World')
+    # img = str(settings.BASE_DIR) + "\static\img\logo_sin_fondo.png"
+    # print(img)
+    # p.drawImage(img,300,300,300,300)
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    today = datetime.now()
+    strToday = today.strftime("%Y%m%d")
+    nombre_archivo = "Cotizacion_"+ strToday +".pdf"
+    return FileResponse(buffer,as_attachment=True,filename=nombre_archivo)
+
+

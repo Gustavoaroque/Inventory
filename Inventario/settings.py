@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'lotification',
     'django_filters',
     'widget_tweaks',
-    'django_excel'
+    'django_excel',
+    'wkhtmltopdf',
+    'reportlab',
 ]
 
 MIDDLEWARE = [
