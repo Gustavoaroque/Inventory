@@ -166,18 +166,64 @@ def gen_EXCEL(request, pk):
 
 
 def pdf_report(request, pk):
+    lote = Pots.objects.get(id=pk)
+    today = datetime.now()
+    strToday = today.strftime("%d/%m/%Y")
+    str_name = today.strftime("%d%m%Y")
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
-    p.drawString(100,100,'Hello World')
-    # img = str(settings.BASE_DIR) + "\static\img\logo_sin_fondo.png"
+
+    #Header
+    #30 like margin in the x axis is a good number for a Paragraph
+    p.setLineWidth(.3)
+    p.setFont('Helvetica',22)
+    p.drawString(30,760,"Funeraria Jerusalen")
+    
+    
+    # img = str(settings.BASE_DIR) + "\static\img\logo.jpg"
     # print(img)
-    # p.drawImage(img,300,300,300,300)
+    # p.drawImage(img,30,700,80,80)
+
+
+    p.setFont('Helvetica',12)
+    p.drawString(30,730,"Cotizacion")
+    #Date
+    p.drawString(500,760,strToday)
+
+    p.setFont('Helvetica',22)
+    Pot_id = "Lote Numero " + str(lote.id)
+    p.drawString(250, 700,Pot_id)
+
+
+    p.setFont('Helvetica-Bold', 12)
+    p.drawString(50,640,"Largo: ")
+    p.drawString(50,610,"Ancho: ")
+    p.drawString(50,580,"Area: ")
+    p.drawString(50,550,"Precio: ")
+    p.drawString(50,520,"Plazo: ")
+    p.drawString(50,490,"Comprador: ")
+    p.drawString(50,460,"Vendedor: ")
+
+
+    p.setFont('Helvetica', 12)
+    p.drawString(130,640,str(lote.pot_large) + " m")
+    p.drawString(130,610,str(lote.pot_width) + " m")
+    area= lote.pot_large * lote.pot_width
+    p.drawString(130,580,str(area) + "m2")
+    p.drawString(130,550, "$"+ str(lote.pot_price))
+    p.drawString(130,520," 36 meses")
+    p.drawString(130,490,"--------")
+    p.drawString(130,460,"---------")
+
+
+
+
     p.showPage()
     p.save()
     buffer.seek(0)
-    today = datetime.now()
-    strToday = today.strftime("%Y%m%d")
-    nombre_archivo = "Cotizacion_"+ strToday +".pdf"
+    
+    
+    nombre_archivo = "Cotizacion_"+ str_name + "lote_numero_"+ str(lote.id) + ".pdf"
     return FileResponse(buffer,as_attachment=True,filename=nombre_archivo)
 
 
