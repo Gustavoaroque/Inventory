@@ -1,10 +1,10 @@
 {% extends 'lotification/base.html' %}
 
 {% block content  %}
-    <p>Seguro que quiere eliminar lote # {{pot.id}}</p>
+    <p>Seguro que quiere eliminar {{client.client_name}} {{client.client_last_name}}</p>
     <form action="" method="post">
         {% csrf_token %}
-        <a href="{% url 'lote' %}"></a>
+        <a href="{% url 'clients' %}"></a>
         <button type="submit"class="btn btn-outline-danger"  >Eliminar</button>
     </form>
 {% endblock %}

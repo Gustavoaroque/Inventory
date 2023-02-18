@@ -1,0 +1,10 @@
+{% extends 'lotification/base.html' %}
+
+{% block content  %}
+    <p>Seguro que quiere eliminar el pago de ${{pay.Payment_amount}} al lote #{{pay.Payment_Pot}}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <a href="{% url 'clients' %}"></a>
+        <button type="submit"class="btn btn-outline-danger">Eliminar</button>
+    </form>
+{% endblock %}

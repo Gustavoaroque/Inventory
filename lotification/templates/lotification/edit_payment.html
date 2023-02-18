@@ -16,7 +16,7 @@
 
             <div class="title_card">
 
-                    <h5>Editar Informacion del lote</h5>
+                    <h5>Editar Informacion del Pago</h5>
 
             </div>
 
@@ -27,20 +27,20 @@
                
                     <div class="inputs_form">
                         
-                        {% render_field form.pot_large class="form-control" placeholder="Largo" %}
+                        {% render_field form.Payment_amount class="form-control" placeholder="Largo" %}
                     </div>
 
                     <div class="inputs_form">
 
-                        {% render_field form.pot_width class="form-control" placeholder="Ancho" %}
+                        {% render_field form.Payment_Pot class="hide_form" placeholder="Ancho" %}
                     </div>
-
+<!-- 
                     <div class="inputs_form">
 
                         {% render_field form.pot_price class="form-control" placeholder="Precio" %}
-                    </div>
+                    </div> -->
 
-                    <div class="inputs_form">
+                    <!-- <div class="inputs_form">
 
                         {% render_field form.pot_dispo class="form-control" %}
                     </div>
@@ -48,7 +48,7 @@
                     <div class="inputs_form">
 
                         {% render_field form.pot_owner class="form-control" placeholder="Comprador" %}
-                    </div>
+                    </div> -->
 
                     <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username">
                     <span class="input-group-text">@</span>

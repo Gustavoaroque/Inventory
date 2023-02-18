@@ -63,9 +63,9 @@
       <tr>
         <th scope="row"><a href="lote_info/{{pago.id}}">{{pago.id}}</a></th>
         <td>$ {{pago.Payment_amount}}</td>
-        <td>{{pago.Payment_date}}</td>
-        <td><a href="payment_edit/{{pago.id}}">editar</a></td>
-        <td><a href="payment_delete/{{pago.id}}">borrar</a></td>
+        <td>{{ pago.Payment_date }}</td>
+        <td><a class="btn btn-outline-warning" href="payment_edit/{{pago.id}}">Editar</a></td>
+        <td><a class="btn btn-outline-danger" href="payment_delete/{{pago.id}}">Borrar</a></td>
 
       </tr>
       

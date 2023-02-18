@@ -228,10 +228,66 @@ def pdf_report(request, pk):
 
 
 def edit_pot(request,pk):
-    return render(request, 'lotification/edit_pot.html',{'pk':pk})
-def delete_pot(request,pk):
-    return render(request, 'lotification/delete_pot.html',{'pk':pk})
+    Pot = Pots.objects.get(id=pk)
+    form = PotForm(instance=Pot)
+    context = {
+        'form': form,
+    }
+    if request.method == 'POST':
+        form = PotForm(request.POST,instance=Pot)
+        if form.is_valid():
+            form.save()
+            return redirect('/lote')
+
+    return render(request, 'lotification/edit_pot.html',context)
+
 def edit_payment(request,pk,pk_pay):
-    return render(request, 'lotification/edit_pot.html',{'pk':pk_pay})
+    Payment = Payments.objects.get(id=pk_pay)
+    form = PaymentForm(instance=Payment)
+    context = {
+        'form': form,
+    }
+    if request.method == 'POST':
+        form = PaymentForm(request.POST,instance=Payment)
+        if form.is_valid():
+            form.save()
+            return redirect('/lote_info/'+str(pk))
+    return render(request, 'lotification/edit_payment.html',context)
+
+def delete_pot(request,pk):
+    pot = Pots.objects.get(id = pk)
+    if request.method == "POST":
+        pot.delete()
+        return redirect('/lote')
+    return render(request, 'lotification/delete_pot.html',{'pot':pot})
+
+
+
 def delete_payment(request,pk,pk_pay):
-    return render(request, 'lotification/delete_pot.html',{'pk':pk_pay})
+    Pay = Payments.objects.get(id = pk_pay)
+    if request.method =="POST":
+        Pay.delete()
+        return redirect('/lote_info/'+str(pk))
+    return render (request, 'lotification/delete_payment.html',{'pay':Pay})
+
+
+
+def delete_client(request,pk):
+    client = Clients.objects.get(id = pk)
+    if request.method == "POST":
+        client.delete()
+        return redirect('/clientes')
+    return render(request, 'lotification/delete_client.html',{'client':client})
+
+def edit_client(request, pk):
+    Client = Clients.objects.get(id= pk)
+    form = ClientsForm(instance=Client)
+    context = {
+        'form':form
+    }
+    if request.method == 'POST':
+        form = ClientsForm(request.POST,instance=Client)
+        if form.is_valid():
+            form.save()
+            return redirect('/clientes')
+    return render(request, 'lotification/edit_client.html',context)

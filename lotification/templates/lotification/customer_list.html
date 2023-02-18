@@ -29,6 +29,8 @@
           <th scope="col">Apellido</th>
           <th scope="col">Numero de Telefono</th>
           <th scope="col">Direccion</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -38,7 +40,10 @@
           <td>{{i.client_name}}</td>
           <td>{{i.client_last_name}}</td>
           <td>{{i.client_phone}}</td>
-          <td> <p>{{i.client_direction}} </p></td>
+          <td class="direction"> <div> <p> {{i.client_direction}}</p> </div> </td>
+          <td> <a class="btn btn-outline-warning" href="client/{{i.id}}/edit">Editar</a> </td>
+          <td><a  class="btn btn-outline-danger" href="client/{{i.id}}/delete">Eliminar</a></td>
+
         </tr>
         {% endfor %}
         
