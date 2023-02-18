@@ -10,22 +10,34 @@
             </figure>
 
         </div>
+
+
         <div class="form_container">
-            <h5>Nuevo Cliente</h5>
+
+            <div class="title_card">
+
+                <h5>Nuevo Cliente</h5>
+            </div>
+
             <form action="" method="post" class="form_new_client">
                 {% csrf_token %}
+
+                
                 <div class="inputs_form">
                     {% render_field form.client_name class="form-control" placeholder="Nombre" %}
                     
                 </div>
+
                 <div class="inputs_form">
                     
                     {% render_field form.client_last_name class="form-control" placeholder="Apellido" %}
                 </div>
+
                 <div class="inputs_form">
                     
                     {% render_field form.client_phone class="form-control" placeholder="Telefono" %}
                 </div>
+
                 <div class="inputs_form">
                     
                     {% render_field form.client_direction class="form-control" placeholder="Direccion" %}

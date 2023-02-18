@@ -14,5 +14,9 @@ urlpatterns = [
     path("login",views.login, name="login"),
     path("register", views.register, name="register"),
     path("lote_info/<str:pk>/gen/",views.gen_EXCEL),
-    path("lote_info/<str:pk>/cotizacion",views.pdf_report, name='pdf_report')
+    path("lote_info/<str:pk>/cotizacion",views.pdf_report, name='pdf_report'),
+    path("lote_info/<str:pk>/edit",views.edit_pot, name='edit_pot'),
+    path("lote_info/<str:pk>/delete",views.delete_pot, name='delete_pot'),
+    path("lote_info/<str:pk>/payment_edit/<str:pk_pay>",views.edit_payment, name='edit_paymentt'),
+    path("lote_info/<str:pk>/payment_delete/<str:pk_pay>",views.delete_payment, name='delete_payment'),
 ]

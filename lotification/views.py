@@ -227,3 +227,11 @@ def pdf_report(request, pk):
     return FileResponse(buffer,as_attachment=True,filename=nombre_archivo)
 
 
+def edit_pot(request,pk):
+    return render(request, 'lotification/edit_pot.html',{'pk':pk})
+def delete_pot(request,pk):
+    return render(request, 'lotification/delete_pot.html',{'pk':pk})
+def edit_payment(request,pk,pk_pay):
+    return render(request, 'lotification/edit_pot.html',{'pk':pk_pay})
+def delete_payment(request,pk,pk_pay):
+    return render(request, 'lotification/delete_pot.html',{'pk':pk_pay})

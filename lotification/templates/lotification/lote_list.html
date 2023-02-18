@@ -2,18 +2,22 @@
 
 
 {% block content %}
-<div class="section_bottom">
-    <div class="title_Section">
-        <h5>Lotes totales</h5>
+
+<div class="main_section_list">
+  <div class="dashboard">
+    <div class="title_card">
+      <h5>Lotes: </h5>
     </div>
 
-    <div class="filter_sect">
+    <div class="filter_section">
       <form action="" method="get">
         {{filtro.form}}
         <button class="btn btn-primary" type="submit" > Buscar</button>
       </form>
     </div>
-    <table class="table">
+
+    <div class="table_info">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -22,6 +26,8 @@
             <th scope="col">Precio</th>
             <th scope="col">Estado</th>
             <th scope="col">Comprador</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
             <!-- <th scope="col">Vendedor</th> -->
           </tr>
         </thead>
@@ -31,11 +37,14 @@
           {% for i in lotes %}
           <tr>
           <th scope="row"><a href="lote_info/{{i.id}}">{{i.id}}</a></th>
-          <td>{{i.pot_large}}</td>
-          <td>{{i.pot_width}}</td>
-          <td>{{i.pot_price}}</td>
+          <td>{{i.pot_large}} m</td>
+          <td>{{i.pot_width}} m </td>
+          <td>$ {{i.pot_price}} </td>
           <td>{{i.pot_dispo}}</td>
           <td>{{i.pot_owner}}</td>
+          <td> <a href="lote_info/{{i.id}}/edit">Editar</a> </td>
+          <td><a href="lote_info/{{i.id}}/delete">Eliminar</a></td>
+
 
           </tr>
           
@@ -44,11 +53,14 @@
         
 
       </table>
-      <div class="btn_section">
-        <a href="home" class="btn btn-outline-danger">Volver</a>
-        <a href="nuevo_lote" class="btn btn-outline-info">Nuevo</a>
-        <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
-      </div>
+    </div>
+
+    <div class="btns_section">
+      <a href="nuevo_lote" class="btn btn-outline-info">Nuevo</a>
+      <a href="home" class="btn btn-outline-danger">Volver</a>
+      <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
+    </div>
+  </div>
 </div>
 
 

@@ -1,4 +1,14 @@
 
+/* Nuevo codigo CSS */
+/* Empezando por el codigo home.html */
+.main_section{
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+
+/* 
+
 
 img{
     width: 120px;
@@ -186,7 +196,7 @@ input{
 
     /* flex-direction: row; */
 }
-
+/* 
 .card_info{
     margin-top: 20px;
     padding-top: 15px;
@@ -244,4 +254,4 @@ table_div_pot{
     margin-top: auto;
     margin-bottom: auto;
     height: 300px;
-}
+} */ */

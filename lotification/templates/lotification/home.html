@@ -1,12 +1,13 @@
 {% extends 'lotification/base.html' %}
 
 {% block content %}
+<main>
 
-<div class="main_section">
-    <div class="section_left">
-        <div class="title_card">
-            <h5>Usuarios totales: </h5>
-        </div>
+  <div class="main_section">
+    <div class="section">
+      <div class="title_card">
+        <h5>Usuarios totales: </h5>
+      </div>
         <div class="table_section">
             <table class="table">
                 <thead>
@@ -37,18 +38,18 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="btn_section_left">
-                <a href="user_list" class="btn btn-outline-info">Ver mas</a>
+              <div class="btns_section single-btn">
+                <a href="user_list" class="btn btn-outline-primary">Ver mas</a>
               </div>
         </div>
     </div>
 
-    <div class="section_right">
+    <div class="section">
     <div class="title_card">
         <h5>Clientes totales: {{numero_clientes}}</h5>
     </div>
     <table class="table">
-        <thead>
+      <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Nombre</th>
@@ -71,20 +72,20 @@
           {% endfor %}
         </tbody>
       </table>
-      <div class="btn_section">
-        <a href="clientes" class="btn btn-outline-info">Ver mas</a>
-        <a href="nuevo_cliente" class="btn btn-outline-info">Nuevo</a>
+      <div class="btns_section">
+        <a href="nuevo_cliente" class="btn btn-outline-primary">Nuevo</a>
+        <a href="clientes" class="btn btn-outline-primary">Ver mas</a>
         <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
       </div>
     </div>
-</div>
+  </div>
 
 <div class="section_bottom">
-    <div class="title_Section">
+    <div class="title_card">
         <h5>Lotes totales: {{ numero_lotes }}</h5>
     </div>
     <table class="table">
-        <thead>
+      <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Longitud</th>
@@ -96,7 +97,7 @@
           </tr>
         </thead>
         <tbody>
-
+          
         
           {% for i in lotes %}
           <tr>
@@ -112,12 +113,13 @@
           {% endfor %}
         </tbody>
         
-
+        
       </table>
-      <div class="btn_section">
-        <a href="lote" class="btn btn-outline-info">Ver mas</a>
-        <a href="nuevo_lote" class="btn btn-outline-info">Nuevo</a>
+      <div class="btns_section">
+        <a href="nuevo_lote" class="btn btn-outline-primary">Nuevo</a>
+        <a href="lote" class="btn btn-outline-primary">Ver mas</a>
         <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
       </div>
-</div>
+    </div>
+  </main>
 {% endblock %}

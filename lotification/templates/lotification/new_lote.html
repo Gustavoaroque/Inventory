@@ -11,23 +11,52 @@
             </figure>
 
         </div>
-        <div class="form_container">
-            <h5>Nuevo Lote</h5>
-            <form action="" method="post">
-                {% csrf_token %}
-                <!-- {{ form }} -->
 
-                <div class="dimensiones">
-                    {% render_field form.pot_large class="form-control" placeholder="Largo" %}
-                    {% render_field form.pot_width class="form-control" placeholder="Ancho" %}
+
+        <div class="form_container">
+
+            <div class="title_card">
+
+                    <h5>Nuevo Lote</h5>
+
+            </div>
+
+            <form action="" method="post" class="form_new_client">
+                {% csrf_token %}
+            
+
+               
+                    <div class="inputs_form">
+                        
+                        {% render_field form.pot_large class="form-control" placeholder="Largo" %}
+                    </div>
+
+                    <div class="inputs_form">
+
+                        {% render_field form.pot_width class="form-control" placeholder="Ancho" %}
+                    </div>
+
+                    <div class="inputs_form">
+
+                        {% render_field form.pot_price class="form-control" placeholder="Precio" %}
+                    </div>
+
+                    <div class="inputs_form">
+
+                        {% render_field form.pot_dispo class="form-control" %}
+                    </div>
+
+                    <div class="inputs_form">
+
+                        {% render_field form.pot_owner class="form-control" placeholder="Comprador" %}
+                    </div>
+
                     <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username">
                     <span class="input-group-text">@</span>
                     <input type="text" class="form-control" placeholder="Server" aria-label="Server"> -->
-                  </div>
-                  {% render_field form.pot_price class="form-control" placeholder="Precio" %}
-                  {% render_field form.pot_dispo class="form-control" %}
-                  {% render_field form.pot_owner class="form-control" placeholder="Comprador" %}
-                  <button type="submit"class="btn btn-outline-success"  >Crear</button>
+                 <div class="btn_div_sect">
+                     <button type="submit"class="btn btn-outline-success"  >Crear</button>
+                </div>
                   <!-- <div class="mb-3">
 
                    <label for="id_pot_large">Largo </label>

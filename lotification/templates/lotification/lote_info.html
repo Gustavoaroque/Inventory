@@ -1,29 +1,49 @@
 {% extends 'lotification/base.html'%}
 {% load widget_tweaks %}
 {% block content %}
-    <div class="card_info">
-        <div class="title_card_info">
+    <div class="dashboard">
+        <div class="title_card">
             <h5>Lote {{lote.id}}</h5>
         </div>
-        <div>
             <div class="lote_info_context">
+              <div class="p_grid">
+              
                 <p><strong>Dimensiones:</strong> {{lote.pot_large}}m x {{lote.pot_width}}m</p>
+            </div>
+              <div class="p_grid">
                 <p><strong>Area:</strong> {{area}}m2</p>
+              
+            </div>
+              <div class="p_grid">
+              
                 <p><strong>Precio:</strong> ${{lote.pot_price}}</p>
+            </div>
+              <div class="p_grid">
                 <p><strong>Disponibilidad:</strong>: {{lote.pot_dispo}}</p>
+              
             </div>
-            <div class="lote_info_context">
+              <div class="p_grid">
+                
                 <p><strong>Comprador:</strong> {{lote.pot_owner}}</p>
-                <!-- <p><strong>Vendedor:</strong> {{lote.vendedor}}</p> -->
-                <p><strong>Fecha de compra:</strong> </p>
-                <p><strong>Saldo:</strong>:$ {{restante}} </p>
-                <p><strong>Saldo:</strong>:{{transactions}} </p>
             </div>
+              <div class="p_grid">
+              
+                <p><strong>Fecha de compra:</strong> </p>
+            </div>
+              <div class="p_grid">
+              
+                <p><strong>Saldo:</strong>:$ {{restante}} </p>
+            </div>
+              <div class="p_grid">
+                <p><strong>Saldo:</strong>:{{transactions}} </p>
+              
+            </div>
+
+                <!-- <p><strong>Vendedor:</strong> {{lote.vendedor}}</p> -->
+           
         </div>
     </div>
-    <div>
-    </div>
-<div class="table_div_pot">
+<div class="dashboard table_dash">
 
   <table class="table">
     <thead>
@@ -31,6 +51,8 @@
         <th scope="col">ID Pago</th>
         <th scope="col">Cantidad</th>
         <th scope="col">Fecha</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
         <!-- <th scope="col">Vendedor</th> -->
       </tr>
     </thead>
@@ -42,6 +64,9 @@
         <th scope="row"><a href="lote_info/{{pago.id}}">{{pago.id}}</a></th>
         <td>$ {{pago.Payment_amount}}</td>
         <td>{{pago.Payment_date}}</td>
+        <td><a href="payment_edit/{{pago.id}}">editar</a></td>
+        <td><a href="payment_delete/{{pago.id}}">borrar</a></td>
+
       </tr>
       
       {% endfor %}
@@ -49,31 +74,29 @@
     
     
   </table>
-  <div class="btn_div_sect">
-    <a href="/lote_info/{{id_pot}}/gen" class="btn btn-outline-info" >Exportar </a>
-    <a href="/lote_info/{{id_pot}}/cotizacion" class="btn btn-outline-info" >Cotizacion </a>
+  <div class="btns_section">
+    <a href="/lote_info/{{id_pot}}/gen" class="btn btn-primary" >Exportar </a>
+    <a href="/lote_info/{{id_pot}}/cotizacion" class="btn btn-primary" >Cotizacion </a>
   </div>
+
 </div>
       <div class="pay_div">
 
         <form action="" method="post">
           {% csrf_token %}
-          <div class="input-group flex-nowrap">
+          <div class="input-group flex-nowrap input_payment">
             <span class="input-group-text" id="addon-wrapping">$</span>
-            {% render_field form_payment.Payment_amount class="form-control" placeholder="Cantidad"%}
+            {% render_field form_payment.Payment_amount class="form-control input_payment" placeholder="Cantidad"%}
 
             <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"> -->
           </div>
           
           <!-- <span class="input-group-text" id="id_Payment_amount">$</span> -->
-          {% render_field form_payment.Payment_Pot class="form-control"%}
-          <div class="btn_div_sect">
-            
-            <button type="submit" class="btn btn-outline-info">Crear</button>
-          </div>
+          {% render_field form_payment.Payment_Pot class="hide_form"%}
+          <button type="submit" class="btn btn-outline-info">Crear</button>
         </form>
       </div>
-      <div class="btn_div_sect">
+      <div class="btns_section">
 
         <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
       </div>
