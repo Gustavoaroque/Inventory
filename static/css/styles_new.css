@@ -70,7 +70,9 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    /* background-color: aqua; */
 }
+
 .filter_section , .table_info{
     display: flex;
     justify-content: space-around;
@@ -135,9 +137,9 @@ body{
     align-items: center;
 }
 .lote_info_context{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
     border: 0.8px black solid;
     padding: 10px;
     margin-top: 5px;
@@ -145,6 +147,7 @@ body{
 }
 .p_grid,tr{
     text-align: center;
+    width: 430px;
 }
 
 .table_dash{
@@ -170,5 +173,32 @@ body{
 }
 .direction  {
     width: 500px;
+
+}
+
+.small_dash{
     /* background-color: aqua; */
+    height: 100%;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border: solid 1px black ;
+    border-radius: 20px;
+}
+.img_dash{
+    width: 800px;
+    height: 100%;
+}
+.row_class{
+    width:1500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: flex;
+    height: 500px;
+    justify-content: space-around;
 }

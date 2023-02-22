@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import *
+from django.contrib import messages
 from .forms  import *
 from django.db import connection
 from .filters import *
@@ -16,8 +16,16 @@ from django.http import FileResponse
 from django.conf import settings
 
 
+# login
+from .decorators import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
+@login_required(login_url='login')
 def home(request):
+    
     clients = Clients.objects.raw('SELECT * FROM lotification_Clients LIMIT 5')
     clients_count = Clients.objects.all().count()
 
@@ -113,19 +121,39 @@ def new_client(request):
     context = {'form':form}
     return render(request,'lotification/new_client.html',context)
 
+@unauthenticated_user
+def login_page(request):
 
-def login(request):
+    if request.method =='POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username= username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else: 
+            messages.info(request, 'Username or password are incorrect')
     return render(request, 'lotification/login.html')
 
+@unauthenticated_user
 def register(request):
+
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            # usuario = form.changed_data.get('username')
+            # messages.success(request,'Cuenta creada para '+ usuario)
+            return redirect('login')
 
     context = {'form':form}
     return render(request, 'lotification/register.html',context)
+
+def log_out(request):
+    logout(request)
+    return redirect('login')
+
 
 # def list(request):
 #     lotes = Lote.objects.all()
@@ -225,6 +253,8 @@ def pdf_report(request, pk):
     
     nombre_archivo = "Cotizacion_"+ str_name + "lote_numero_"+ str(lote.id) + ".pdf"
     return FileResponse(buffer,as_attachment=True,filename=nombre_archivo)
+
+
 
 
 def edit_pot(request,pk):

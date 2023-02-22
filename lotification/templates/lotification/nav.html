@@ -7,7 +7,12 @@
       </figure>
       <form class="d-flex" role="search">
         <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-        <button class="btn btn-outline-danger" type="submit">Cerrar sesion</button>
+
+        <!-- <a href="{% url 'login'%}" class="btn btn-outline-danger">Cerrar sesion a</a>
+        <button class="btn btn-outline-danger" type="submit">Cerrar sesion</button> -->
       </form>
+      <span style="color:aliceblue" >Bienvenido , {{request.user}}</span>
+      <span><a href="{% url 'logOut' %}">Log out</a></span>
     </div>
+
   </nav>

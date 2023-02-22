@@ -1,48 +1,63 @@
 {% extends 'lotification/base.html'%}
 {% load widget_tweaks %}
 {% block content %}
-    <div class="dashboard">
-        <div class="title_card">
-            <h5>Lote {{lote.id}}</h5>
-        </div>
-            <div class="lote_info_context">
-              <div class="p_grid">
-              
-                <p><strong>Dimensiones:</strong> {{lote.pot_large}}m x {{lote.pot_width}}m</p>
-            </div>
-              <div class="p_grid">
-                <p><strong>Area:</strong> {{area}}m2</p>
-              
-            </div>
-              <div class="p_grid">
-              
-                <p><strong>Precio:</strong> ${{lote.pot_price}}</p>
-            </div>
-              <div class="p_grid">
-                <p><strong>Disponibilidad:</strong>: {{lote.pot_dispo}}</p>
-              
-            </div>
-              <div class="p_grid">
-                
-                <p><strong>Comprador:</strong> {{lote.pot_owner}}</p>
-            </div>
-              <div class="p_grid">
-              
-                <p><strong>Fecha de compra:</strong> </p>
-            </div>
-              <div class="p_grid">
-              
-                <p><strong>Saldo:</strong>:$ {{restante}} </p>
-            </div>
-              <div class="p_grid">
-                <p><strong>Saldo:</strong>:{{transactions}} </p>
-              
-            </div>
 
-                <!-- <p><strong>Vendedor:</strong> {{lote.vendedor}}</p> -->
-           
-        </div>
+<div class="title_card">
+  <h5>Lote {{lote.id}}</h5>
+</div>
+
+<div class="row_class">
+  <div class="img_dash">
+    <figure>
+      <img src="" alt="Mapa lote">
+    </figure>
+    <div class="title_card">
+      <form action="">
+        <button type="submit" class="btn btn-primary">Subir foto</button>
+      </form>
     </div>
+  </div>
+  <div class="small_dash">
+    <!-- numero 1 -->
+    <div class="p_grid">
+      <p><strong>Dimensiones:</strong> {{lote.pot_large}}m x {{lote.pot_width}}m</p>
+    </div>
+    <div class="p_grid">
+      <p><strong>Area:</strong> {{area}}m2</p>
+    </div>
+    <div class="p_grid">
+      <p><strong>Precio:</strong> ${{lote.pot_price}}</p>
+    </div>
+    <div class="p_grid">
+      <p><strong>Disponibilidad:</strong>: {{lote.pot_dispo}}</p>
+
+    </div>
+    <div class="p_grid">
+
+      <p><strong>Comprador:</strong> {{lote.pot_owner}}</p>
+    </div>
+    <div class="p_grid">
+
+      <p><strong>Fecha de compra:</strong> </p>
+    </div>
+    <div class="p_grid">
+
+      <p><strong>Saldo:</strong>:$ {{restante}} </p>
+    </div>
+    <div class="p_grid">
+      <p><strong>Saldo:</strong>:{{transactions}} </p>
+
+    </div>
+
+
+
+
+    <!-- <p><strong>Vendedor:</strong> {{lote.vendedor}}</p> -->
+
+  </div>
+
+</div>
+
 <div class="dashboard table_dash">
 
   <table class="table">
@@ -57,8 +72,8 @@
       </tr>
     </thead>
     <tbody>
-      
-      
+
+
       {% for pago in pagos %}
       <tr>
         <th scope="row"><a href="lote_info/{{pago.id}}">{{pago.id}}</a></th>
@@ -68,37 +83,37 @@
         <td><a class="btn btn-outline-danger" href="payment_delete/{{pago.id}}">Borrar</a></td>
 
       </tr>
-      
+
       {% endfor %}
     </tbody>
-    
-    
+
+
   </table>
   <div class="btns_section">
-    <a href="/lote_info/{{id_pot}}/gen" class="btn btn-primary" >Exportar </a>
-    <a href="/lote_info/{{id_pot}}/cotizacion" class="btn btn-primary" >Cotizacion </a>
+    <a href="/lote_info/{{id_pot}}/gen" class="btn btn-primary">Exportar </a>
+    <a href="/lote_info/{{id_pot}}/cotizacion" class="btn btn-primary">Cotizacion </a>
   </div>
 
 </div>
-      <div class="pay_div">
+<div class="pay_div">
 
-        <form action="" method="post">
-          {% csrf_token %}
-          <div class="input-group flex-nowrap input_payment">
-            <span class="input-group-text" id="addon-wrapping">$</span>
-            {% render_field form_payment.Payment_amount class="form-control input_payment" placeholder="Cantidad"%}
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="input-group flex-nowrap input_payment">
+      <span class="input-group-text" id="addon-wrapping">$</span>
+      {% render_field form_payment.Payment_amount class="form-control input_payment" placeholder="Cantidad"%}
 
-            <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"> -->
-          </div>
-          
-          <!-- <span class="input-group-text" id="id_Payment_amount">$</span> -->
-          {% render_field form_payment.Payment_Pot class="hide_form"%}
-          <button type="submit" class="btn btn-outline-info">Crear</button>
-        </form>
-      </div>
-      <div class="btns_section">
+      <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"> -->
+    </div>
 
-        <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
-      </div>
+    <!-- <span class="input-group-text" id="id_Payment_amount">$</span> -->
+    {% render_field form_payment.Payment_Pot class="hide_form"%}
+    <button type="submit" class="btn btn-outline-info">Crear</button>
+  </form>
+</div>
+<div class="btns_section">
+
+  <a href="{% url 'lote' %}" class="btn btn-outline-danger">Volver</a>
+</div>
 
 {% endblock %}
