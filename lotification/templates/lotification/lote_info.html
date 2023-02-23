@@ -89,10 +89,7 @@
 
 
   </table>
-  <div class="btns_section">
-    <a href="/lote_info/{{id_pot}}/gen" class="btn btn-primary">Exportar </a>
-    <a href="/lote_info/{{id_pot}}/cotizacion" class="btn btn-primary">Cotizacion </a>
-  </div>
+
 
 </div>
 <div class="pay_div">
@@ -110,6 +107,11 @@
     {% render_field form_payment.Payment_Pot class="hide_form"%}
     <button type="submit" class="btn btn-outline-info">Crear</button>
   </form>
+</div>
+
+<div class="btns_section">
+  <a href="/lote_info/{{id_pot}}/gen" class="btn btn-primary">Exportar </a>
+  <a href="/lote_info/{{id_pot}}/cotizacion" class="btn btn-primary">Cotizacion </a>
 </div>
 <div class="btns_section">
 

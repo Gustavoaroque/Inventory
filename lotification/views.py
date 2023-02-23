@@ -15,6 +15,7 @@ from reportlab.pdfgen import canvas
 from django.http import FileResponse
 from django.conf import settings
 
+from django.contrib.auth.models import Group
 
 # login
 from .decorators import *
@@ -24,23 +25,35 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def home(request):
-    
+    group = request.user.groups.all()[0].name
     clients = Clients.objects.raw('SELECT * FROM lotification_Clients LIMIT 5')
     clients_count = Clients.objects.all().count()
 
     lotes = Pots.objects.raw('SELECT * FROM lotification_Pots LIMIT 5')
     pots_count = Pots.objects.all().count()
-
     
-    context = {'lotes':lotes,'clients':clients,'numero_clientes':clients_count,'numero_lotes':pots_count}   
+
+    if group == 'Admin':
+        permisison=True
+    else:
+        permisison= False
+    
+    context = {'lotes':lotes,'clients':clients,'numero_clientes':clients_count,'numero_lotes':pots_count, 'permission':permisison}   
     return render(request, 'lotification/home.html',context)
 
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def user_list(request):
     clients = Clients.objects.all()
     context = {'clients':clients}
     return render(request, 'lotification/user_list.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def customers_list(request):
     clients = Clients.objects.all()
     
@@ -50,6 +63,8 @@ def customers_list(request):
     context = {'clients':clients,'filtro':cliente_filtrado}
     return render(request, 'lotification/customer_list.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def lote_list(request):
         
     lotes = Pots.objects.all()
@@ -59,6 +74,8 @@ def lote_list(request):
     context = {'lotes':lotes,'filtro':myFilter}
     return render(request, 'lotification/lote_list.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def lote_info(request,pk):
 
     cursor = Pots.objects.get(id = pk)
@@ -97,7 +114,8 @@ def lote_info(request,pk):
 
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def new_lote(request):
     form = PotForm()
     if request.method == 'POST':
@@ -108,6 +126,9 @@ def new_lote(request):
     context = {'form':form}
     return render(request,'lotification/new_lote.html',context  )
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def new_client(request):
     # pass
     form = ClientsForm()
@@ -135,20 +156,27 @@ def login_page(request):
             messages.info(request, 'Username or password are incorrect')
     return render(request, 'lotification/login.html')
 
-@unauthenticated_user
+
+@allowed_users(allowed_roles = ['Admin'])
 def register(request):
 
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            # usuario = form.changed_data.get('username')
-            # messages.success(request,'Cuenta creada para '+ usuario)
+            user = form.save()
+            username = form.cleaned_data.get('username')    
+            group = Group.objects.get(name="Users")
+            user.groups.add(group)
+            User_empl.objects.create(
+                user_user_emplo=user,
+            )
+            # messages.success(request,'Cuenta creada para '+ username)
             return redirect('login')
 
     context = {'form':form}
     return render(request, 'lotification/register.html',context)
+
 
 def log_out(request):
     logout(request)
@@ -161,7 +189,8 @@ def log_out(request):
 #     return render(request,'lotification/list.html',{'lotes':lotes})
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def gen_EXCEL(request, pk):
     cursor = Pots.objects.get(id = pk)
     pagos = Payments.objects.filter(Payment_Pot = cursor.id)
@@ -192,7 +221,8 @@ def gen_EXCEL(request, pk):
     # print(export)
     # return excel.make_response(sheet,"csv",file_name="results de pago-"+strToday+".csv")
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def pdf_report(request, pk):
     lote = Pots.objects.get(id=pk)
     today = datetime.now()
@@ -256,7 +286,8 @@ def pdf_report(request, pk):
 
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def edit_pot(request,pk):
     Pot = Pots.objects.get(id=pk)
     form = PotForm(instance=Pot)
@@ -271,6 +302,8 @@ def edit_pot(request,pk):
 
     return render(request, 'lotification/edit_pot.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def edit_payment(request,pk,pk_pay):
     Payment = Payments.objects.get(id=pk_pay)
     form = PaymentForm(instance=Payment)
@@ -284,6 +317,8 @@ def edit_payment(request,pk,pk_pay):
             return redirect('/lote_info/'+str(pk))
     return render(request, 'lotification/edit_payment.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def delete_pot(request,pk):
     pot = Pots.objects.get(id = pk)
     if request.method == "POST":
@@ -292,7 +327,8 @@ def delete_pot(request,pk):
     return render(request, 'lotification/delete_pot.html',{'pot':pot})
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def delete_payment(request,pk,pk_pay):
     Pay = Payments.objects.get(id = pk_pay)
     if request.method =="POST":
@@ -301,7 +337,8 @@ def delete_payment(request,pk,pk_pay):
     return render (request, 'lotification/delete_payment.html',{'pay':Pay})
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def delete_client(request,pk):
     client = Clients.objects.get(id = pk)
     if request.method == "POST":
@@ -309,6 +346,8 @@ def delete_client(request,pk):
         return redirect('/clientes')
     return render(request, 'lotification/delete_client.html',{'client':client})
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
 def edit_client(request, pk):
     Client = Clients.objects.get(id= pk)
     form = ClientsForm(instance=Client)
