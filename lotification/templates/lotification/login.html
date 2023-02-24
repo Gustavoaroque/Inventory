@@ -1,15 +1,41 @@
-{% extends 'lotification/base.html' %}
+
+{% extends 'lotification/base.html'%}
+{% load widget_tweaks %}
+{% load static %}
 
 {% block content %}
-<h1>LOGIN</h1>
-{% for message in messages %}
-    <h5 id="message">{{message}} </h5>
-{% endfor %}
+    <div class="main_section_new">
+        <div class="img_container">
+            <figure class="figure_new">
+                <img src="{% static '/img/logo_sin_fondo.png' %}" alt="">
+            </figure>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="text" id="username" name="username">
-    <input type="password" id="password" name="password">
-    <button type="submit">Log in</button>
-</form>
-{% endblock %} 
+        </div>
+
+        <div class="form_container">
+            <div class="title_card">
+
+                <h5>Inicio de Sesion</h5>
+
+        </div>
+        <form class="form_login" action="" method="post">
+            {% csrf_token %}
+            <div class="form_content">
+
+                <div class="inputs_form">
+                    <input name="username" type="text" placeholder="Nombre de ususario">
+                </div>
+                <div class="inputs_form ">
+                    <input  name="password" type="password" placeholder="Password">
+                </div>
+                
+                <div class="btn_div_sect">
+                    
+                    <button type="submit" class="btn btn-outline-info">Iniciar Sesion</button>
+                </div>
+            </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

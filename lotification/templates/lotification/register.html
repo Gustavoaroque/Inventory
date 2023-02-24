@@ -1,14 +1,44 @@
-{% extends 'lotification/base.html' %}
+
+{% extends 'lotification/base.html'%}
+{% load widget_tweaks %}
+{% load static %}
 
 {% block content %}
-    <form action="" method="post">
-        {%csrf_token%}
-        <form action="" method="POST">
-            {{form.username}}
-            {{form.password1}}
-            {{form.password2}}
-            <input type="submit" value="Enviar">
-        </form>
-        <!-- <button type="submit">Enviar</button> -->
-    </form>
+    <div class="main_section_new">
+        <div class="img_container">
+            <figure class="figure_new">
+                <img src="{% static '/img/logo_sin_fondo.png' %}" alt="">
+            </figure>
+
+        </div>
+
+        <div class="form_container">
+            <div class="title_card">
+
+                <h5>Crear Usuario</h5>
+
+        </div>
+        <form class="form_login" action="" method="post">
+            {% csrf_token %}
+            <div class="form_content">
+
+                <div class="inputs_form">
+                    {% render_field form.username class="form-control" placeholder="Nombre" %}
+                </div>
+                <div class="inputs_form ">
+                    {% render_field form.password1 class="form-control" placeholder="Contrasena"  %}
+                </div>
+                <div class="inputs_form">
+                    {% render_field form.password2 class="form-control" placeholder="Reingresar contrasena" %}
+                </div>
+                <div class="btn_div_sect">
+                    
+                    <button type="submit" class="btn btn-outline-info">Crear Usuario</button>
+                </div> 
+            </div>
+
+            </form>
+            <a class="btn btn-outline-danger" href="{% url 'home' %}">Volver</a>
+        </div>
+    </div>
 {% endblock %}
