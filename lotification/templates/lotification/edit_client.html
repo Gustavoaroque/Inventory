@@ -25,24 +25,24 @@
             
 
                
-                    <div class="inputs_form">
-                        
-                        {% render_field form.client_name class="form-control" placeholder="Nombre" %}
+                    <div class="inputs_form extra">
+                        <label for="Nombre">Nombre</label>
+                        {% render_field form.client_name class="form-control" placeholder="Nombre" id="Nombre" %}
                     </div>
 
-                    <div class="inputs_form">
-
-                        {% render_field form.client_last_name class="form-control" placeholder="Apellido" %}
+                    <div class="inputs_form extra">
+                        <label for="Apellido">Apellido</label>
+                        {% render_field form.client_last_name class="form-control" placeholder="Apellido" id="Apellido" %}
                     </div>
 
-                    <div class="inputs_form">
-
-                        {% render_field form.client_phone class="form-control" placeholder="Precio" %}
+                    <div class="inputs_form extra">
+                        <label for="Telefono">Telefono</label>
+                        {% render_field form.client_phone class="form-control" id="Telefono" %}
                     </div> 
 
-                     <div class="inputs_form">
-
-                        {% render_field form.client_direction class="form-control" %}
+                     <div class="inputs_form extra">
+                        <label for="direccion">Direccion</label>
+                        {% render_field form.client_direction class="form-control" id="direccion"%}
                     </div>
 
                  <div class="btn_div_sect">

@@ -8,13 +8,14 @@
 
 <div class="row_class">
   <div class="img_dash">
-    <figure>
-      <img src="" alt="Mapa lote">
+    <figure class="map">
+      {%if lote.pot_map == None %}
+        <img src="" alt="Mapa no adjuntado">
+      {% else %}
+        <img class="img_map" src="{{lote.pot_map.url}}" alt="">
+      {%endif%}
     </figure>
     <div class="title_card">
-      <form action="">
-        <button type="submit" class="btn btn-primary">Subir foto</button>
-      </form>
     </div>
   </div>
   <div class="small_dash">

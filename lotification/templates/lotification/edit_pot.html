@@ -20,41 +20,46 @@
 
             </div>
 
-            <form action="" method="post" class="form_new_client">
+            <form action="" method="post" class="form_new_client" enctype="multipart/form-data">
                 {% csrf_token %}
             
 
                
-                    <div class="inputs_form">
+                    <div class="inputs_form extra">
+                        <label for="Largo">Largo</label>
+                        {% render_field form.pot_large class="form-control" placeholder="Largo" id="Largo"%}
+                    </div>
+
+                    <div class="inputs_form extra">
+                        <label for="Ancho">Ancho</label>
+                        {% render_field form.pot_width class="form-control" placeholder="Ancho" id="Ancho"%}
+                    </div>
+
+                    <div class="inputs_form extra">
+                        <label for="precio">Precio</label>
+                        {% render_field form.pot_price class="form-control" placeholder="Precio" id="precio" %}
+                    </div>
+
+                    <div class="inputs_form extra">
+                        <label for="Disponibilidad">Disponibilidad</label>
+                        {% render_field form.pot_dispo class="form-control" id="dispo" %}
+                    </div>
+
+                    <div class="inputs_form extra" >
+                        <label for="Comprador">Comprador</label>
+                        {% render_field form.pot_owner class="form-control" placeholder="Comprador" id="Comprador"%}
+                    </div>
+                    <div class="inputs_form extra">
+                        {% render_field form.pot_map class="form-control"%}
                         
-                        {% render_field form.pot_large class="form-control" placeholder="Largo" %}
-                    </div>
-
-                    <div class="inputs_form">
-
-                        {% render_field form.pot_width class="form-control" placeholder="Ancho" %}
-                    </div>
-
-                    <div class="inputs_form">
-
-                        {% render_field form.pot_price class="form-control" placeholder="Precio" %}
-                    </div>
-
-                    <div class="inputs_form">
-
-                        {% render_field form.pot_dispo class="form-control" %}
-                    </div>
-
-                    <div class="inputs_form">
-
-                        {% render_field form.pot_owner class="form-control" placeholder="Comprador" %}
+                        <!-- {% render_field form.pot_owner class="form-control" placeholder="Comprador" %} -->
                     </div>
 
                     <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username">
                     <span class="input-group-text">@</span>
                     <input type="text" class="form-control" placeholder="Server" aria-label="Server"> -->
                  <div class="btn_div_sect">
-                     <button type="submit"class="btn btn-outline-success"  >Crear</button>
+                     <button type="submit"class="btn btn-outline-success"  >Actualizar</button>
                 </div>
                   <!-- <div class="mb-3">
 
@@ -70,7 +75,7 @@
                 </div> -->
                   
             </form>
-            <a href="home" class="btn btn-outline-danger">Cancelar</a>
+            <a href="{% url 'home' %}" class="btn btn-outline-danger">Cancelar</a>
         </div>
     </div>
 {% endblock %}

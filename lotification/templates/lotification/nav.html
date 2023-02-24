@@ -3,16 +3,24 @@
 <nav class="navbar bg-dark" style="background-color: #000103;">
     <div class="container-fluid">
       <figure class="logo_navbar">
-        <img src="{% static '/img/logo_sin_fondo.png' %}" alt="Logo">
-      </figure>
-      <form class="d-flex" role="search">
-        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <a href=" {% url 'home' %}">
 
-        <!-- <a href="{% url 'login'%}" class="btn btn-outline-danger">Cerrar sesion a</a>
-        <button class="btn btn-outline-danger" type="submit">Cerrar sesion</button> -->
-      </form>
-      <span style="color:aliceblue" >Bienvenido , {{request.user}}</span>
-      <span><a href="{% url 'logOut' %}">Log out</a></span>
+          <img src="{% static '/img/logo_sin_fondo.png' %}" alt="Logo" class="logo">
+        </a>
+      </figure>
+      <span style="color:aliceblue" >Bienvenido ,<a href="">{{ request.user }}</a></span>
+      <span><a class="btn btn-outline-danger" href="{% url 'logOut' %}">Cerrar sesion</a></span>
     </div>
 
   </nav>
+
+  <!-- <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <figure></figure>
+      <a class="navbar-brand">Navbar</a>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav> -->

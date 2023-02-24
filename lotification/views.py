@@ -27,6 +27,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def home(request):
+    title = "Home"
     group = request.user.groups.all()[0].name
     clients = Clients.objects.raw('SELECT * FROM lotification_Clients LIMIT 5')
     clients_count = Clients.objects.all().count()
@@ -40,7 +41,8 @@ def home(request):
     else:
         permisison= False
     
-    context = {'lotes':lotes,'clients':clients,'numero_clientes':clients_count,'numero_lotes':pots_count, 'permission':permisison}   
+    
+    context = {'lotes':lotes,'clients':clients,'numero_clientes':clients_count,'numero_lotes':pots_count, 'permission':permisison, 'title':title}   
     return render(request, 'lotification/home.html',context)
 
 
@@ -48,6 +50,7 @@ def home(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def user_list(request):
+    title = "Clientes"
     clients = Clients.objects.all()
     context = {'clients':clients}
     return render(request, 'lotification/user_list.html',context)
@@ -55,6 +58,7 @@ def user_list(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def customers_list(request):
+    title = "Clientes"
     clients = Clients.objects.all()
     
     cliente_filtrado = ClientFilter(request.GET, queryset=clients)
@@ -66,18 +70,18 @@ def customers_list(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def lote_list(request):
-        
+    title = "Lotes"
     lotes = Pots.objects.all()
     myFilter = PotFilter(request.GET, queryset=lotes) 
 
     lotes = myFilter.qs  
-    context = {'lotes':lotes,'filtro':myFilter}
+    context = {'lotes':lotes,'filtro':myFilter, 'title':title}
     return render(request, 'lotification/lote_list.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def lote_info(request,pk):
-
+    title = "Lote "+ str(pk) + " info "
     cursor = Pots.objects.get(id = pk)
     form = PaymentForm(initial={'Payment_Pot':cursor})
     # pass
@@ -88,7 +92,10 @@ def lote_info(request,pk):
    
     all_Pots = Pots.objects.all()
     # x = cursor.payments_set.all()
-
+    if cursor.pot_map == None:
+        print('NO HAY IMAGEN')
+    else:
+        print('HAY MAPA')
     pagos = Payments.objects.filter(Payment_Pot = cursor.id)
     if request.method == 'POST':
         form = PaymentForm(request.POST)
@@ -108,7 +115,7 @@ def lote_info(request,pk):
 
     print(str(abono_total))
     restante = cursor.pot_price - abono_total
-    context = {'lote':cursor, 'pagos':pagos,'form_payment':form, 'area':area, 'abono':abono_total, 'restante':restante,'id_pot':pk}
+    context = {'lote':cursor, 'pagos':pagos,'form_payment':form, 'area':area, 'abono':abono_total, 'restante':restante,'id_pot':pk, 'title':title}
 
     return render(request, 'lotification/lote_info.html',context)
 
@@ -144,7 +151,7 @@ def new_client(request):
 
 @unauthenticated_user
 def login_page(request):
-
+    title = 'Inicio de Sesion'
     if request.method =='POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -154,7 +161,8 @@ def login_page(request):
             return redirect('home')
         else: 
             messages.info(request, 'Username or password are incorrect')
-    return render(request, 'lotification/login.html')
+    context = {'title':title}
+    return render(request, 'lotification/login.html', context)
 
 
 @allowed_users(allowed_roles = ['Admin'])
@@ -295,7 +303,7 @@ def edit_pot(request,pk):
         'form': form,
     }
     if request.method == 'POST':
-        form = PotForm(request.POST,instance=Pot)
+        form = PotForm(request.POST,request.FILES ,instance=Pot)
         if form.is_valid():
             form.save()
             return redirect('/lote')
