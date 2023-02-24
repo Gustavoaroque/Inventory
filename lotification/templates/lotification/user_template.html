@@ -1,0 +1,34 @@
+<div class="section_bottom">
+    <div class="title_card">
+        <h5>Clientes totales: {{numero_clientes}}</h5>
+    </div>
+    <table class="table">
+      <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Direccion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for j in clients %}
+          <tr>
+          <th scope="row">{{j.id}}</th>
+          <td>{{j.client_name}}</td>
+          <td>{{j.client_last_name}}</td>
+          <td>{{j.client_phone}}</td>
+          <td style="width: 300px;"> <p>{{j.client_direction}} </p></td>
+          <!-- <td>{{i.vendedor}}</td> -->
+          </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="btns_section">
+        <a href="nuevo_cliente" class="btn btn-outline-primary">Nuevo</a>
+        <a href="clientes" class="btn btn-outline-primary">Ver mas</a>
+        <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
+      </div>
+    </div>
