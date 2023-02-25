@@ -8,7 +8,7 @@
           <img src="{% static '/img/logo_sin_fondo.png' %}" alt="Logo" class="logo">
         </a>
       </figure>
-      <span style="color:aliceblue" >Bienvenido ,<a href="">{{ request.user }}</a></span>
+      <span style="color:aliceblue" >Bienvenido ,<a href="user_info/{{request.user.id}}">{{ request.user }}</a></span>
       <span><a class="btn btn-outline-danger" href="{% url 'logOut' %}">Cerrar sesion</a></span>
     </div>
 

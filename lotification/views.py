@@ -30,6 +30,8 @@ def home(request):
 
 
     title = "Home"
+    users = User_empl.objects.all()
+    users_total = User_empl.objects.all().count()
     group = request.user.groups.all()[0].name
     clients = Clients.objects.raw('SELECT * FROM lotification_Clients LIMIT 5')
     clients_count = Clients.objects.all().count()
@@ -44,7 +46,15 @@ def home(request):
         permisison= False
     
     
-    context = {'lotes':lotes,'clients':clients,'numero_clientes':clients_count,'numero_lotes':pots_count, 'permission':permisison, 'title':title}   
+    context = {'lotes':lotes,
+               'clients':clients,
+               'numero_clientes':clients_count,
+               'numero_lotes':pots_count,
+               'permission':permisison, 
+               'title':title,
+               'users':users,
+               'users_total':users_total,
+               }   
     return render(request, 'lotification/home.html',context)
 
 
@@ -52,9 +62,13 @@ def home(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def user_list(request):
-    title = "Clientes"
-    clients = Clients.objects.all()
-    context = {'clients':clients}
+    title = "Usuarios"
+    users = User_empl.objects.all()
+    users_total = User_empl.objects.all().count()
+    context = {'users':users,
+               'title':title,
+               'users_total':users_total,
+               }
     return render(request, 'lotification/user_list.html',context)
 
 @login_required(login_url='login')
@@ -181,8 +195,12 @@ def register(request):
             User_empl.objects.create(
                 user_user_emplo=user,
             )
-            # messages.success(request,'Cuenta creada para '+ username)
+            messages.success(request,'Cuenta creada para '+ username)
             return redirect('login')
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+                print(msg)
 
     context = {'form':form}
     return render(request, 'lotification/register.html',context)
@@ -376,7 +394,7 @@ def edit_client(request, pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def edit_user(request,pk):
-    Current_user = User_empl.objects.get(id=pk)
+    Current_user = User_empl.objects.get(user_user_emplo=pk)
     # print(Current_user.user_user_emplo)
     form_u = UserEmplForm(instance=Current_user)
     # print(form_u)
@@ -391,3 +409,13 @@ def edit_user(request,pk):
             form.save()
             return redirect('home')
     return render(request, 'lotification/User_profile.html',context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin'])
+def delete_user(request,pk):
+    user = User.objects.get(id = pk)
+    if request.method == "POST":
+        user.delete()
+        return redirect('/user_list')
+    return render(request, 'lotification/delete_user.html',{'user':user})

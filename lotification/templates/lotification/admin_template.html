@@ -3,36 +3,27 @@
 <div class="main_section">
     <div class="section">
       <div class="title_card">
-        <h5>Usuarios totales: </h5>
+        <h5>Usuarios totales: {{users_total}} </h5>
       </div>
         <div class="table_section">
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Cedula</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {% for user in users %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="row">{{user.user_user_emplo.id}}</th>
+                    <td>{{user.user_emplo_name}}</td>
+                    <td>{{user.user_emplo_last_name}}</td>
+                    <td>{{user.user_emplo_identification}}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
               <div class="btns_section">
@@ -40,7 +31,7 @@
                 <a href="{% url 'register' %}" class="btn btn-outline-primary">Nuevo Usuario</a>
                 
                 {%endif%}
-                <a href="clientes" class="btn btn-outline-primary">Ver mas</a>
+                <a href="user_list" class="btn btn-outline-primary">Ver mas</a>
                 <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
               </div>
         </div>

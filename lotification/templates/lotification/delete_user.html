@@ -1,0 +1,9 @@
+
+{% block content  %}
+    <p>Seguro que quiere eliminar el usuario: {{user.username}}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <a href="{% url 'user_list' %}"></a>
+        <button type="submit"class="btn btn-outline-danger">Eliminar</button>
+    </form>
+{% endblock %}

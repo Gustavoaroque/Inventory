@@ -1,11 +1,64 @@
 {% extends 'lotification/base.html'%}
 
 {% block content %}
-    {% for i in clients %}
-        <p>{{ i.client_name }}</p>
-        <br>
-        <p>{{i.client_last_name}}</p>
-        <br>
-        <p>: {{i.client_direction}}</p>
-    {% endfor %}
+<div class="main_section_list">
+    <div class="dashboard">
+      <div class="title_card">
+        <h5>Usuarios: {{users_total}}</h5>
+      </div>
+  
+      <!-- <div class="filter_section">
+        <form action="" method="get">
+          {{filtro.form}}
+          <button class="btn btn-primary" type="submit" > Buscar</button>
+        </form>
+      </div> -->
+  
+      <div class="table_info">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre de usuario</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Cedula</th>
+              <th scope="col"></th>
+              <!-- <th scope="col">Vendedor</th> -->
+            </tr>
+          </thead>
+          <tbody>
+  
+          
+            {% for user in users %}
+            <tr>
+            <th scope="row"><a href="user_info/{{user.user_user_emplo.id}}">{{user.user_user_emplo.id}}</a></th>
+            <td>{{user.user_emplo_name}}</td>
+            <td>{{user.user_emplo_last_name}}</td>
+            <td>{{user.user_emplo_identification}} </td>
+            <td>{{user.user_emplo_addres}}</td>
+            <td>{{user.user_emplo_phone}}</td>
+            <td>{{user.user_emplo_identification}}</a> </td>
+            <td><a  class="btn btn-outline-danger" href="user/{{user.user_user_emplo.id}}/delete">Eliminar</a></td>
+  
+  
+            </tr>
+            
+            {% endfor %}
+          </tbody>
+          
+  
+        </table>
+      </div>
+  
+      <div class="btns_section">
+        <a href="register" class="btn btn-outline-info">Nuevo</a>
+        <a href="home" class="btn btn-outline-danger">Volver</a>
+        <!-- <button type="button" class="btn btn-outline-danger">Danger</button> -->
+      </div>
+    </div>
+  </div>
+  
 {% endblock %}
