@@ -28,6 +28,7 @@ class Clients(models.Model):
     client_last_name = models.CharField(max_length=20,null=True)
     client_phone =models.BigIntegerField(null=True)
     client_direction = models.TextField(null=True)
+    client_identification = models.CharField(max_length=50, null=True, blank=True)
     def __str__(self):
         return str(self.client_name)
 class Pots(models.Model):
@@ -40,6 +41,7 @@ class Pots(models.Model):
     pot_price = models.FloatField()
     pot_dispo = models.CharField(max_length=20,choices=options, default="Disponible")
     pot_owner = models.ForeignKey(Clients, null=True,blank=True, on_delete=models.CASCADE)
+    pot_seller = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     pot_map = models.ImageField(null=True, blank=True)
     def __str__(self):
         return str(self.id)

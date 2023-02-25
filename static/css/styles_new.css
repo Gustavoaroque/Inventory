@@ -257,3 +257,22 @@ label{
 .form_new_client{
     width: 400px;
 }
+.profile_section{
+    display: flex;
+    width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+
+}
+.photo_usr{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+    /* background-color: aqua; */
+}
+.profile_ilustration img {
+    width: 500px;
+} 
+

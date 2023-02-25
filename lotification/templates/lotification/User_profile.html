@@ -1,0 +1,44 @@
+{% extends 'lotification/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <div class="profile_section">
+        <div class="photo_usr">
+           <figure class="profile_ilustration">
+            <img src="{% static '/img/profile_pic.png' %}" alt="">
+           </figure> 
+           <div class="title_card">
+            <h5>{{current_user.user_user_emplo}}</h5>
+           </div>
+        </div>
+        <div class="user_form_info">
+           <form action="" method="post">
+            {% csrf_token %}
+            <div class="inputs_form">
+                {% render_field form.user_emplo_name class="form-control" placeholder="Nombre" id="Nombre" %}    
+            </div>
+            <div class="inputs_form">
+                {% render_field form.user_emplo_last_name class="form-control" placeholder="Nombre" id="Nombre" %}    
+            </div>
+            <div class="inputs_form">
+                {% render_field form.user_emplo_identification class="form-control" placeholder="Nombre" id="Nombre" %}    
+            </div>
+            <div class="inputs_form">
+                {% render_field form.user_emplo_addres class="form-control" placeholder="Nombre" id="Nombre" %}    
+            </div>
+            <div class="inputs_form">
+                {% render_field form.user_emplo_phone class="form-control" placeholder="Nombre" id="Nombre" %}    
+            </div>
+            <div class="inputs_form">
+                {% render_field form.user_emplo_email class="form-control" placeholder="Nombre" id="Nombre" %}    
+            </div>
+            <div class="btn_div_sect">
+                <button type="submit"class="btn btn-outline-success"  >Actualizar</button>
+           </div>
+             
+       </form>
+       <a href="{% url 'clients' %}" class="btn btn-outline-danger">Cancelar</a>
+           </form> 
+        </div>
+    </div>
+    {% endblock %}

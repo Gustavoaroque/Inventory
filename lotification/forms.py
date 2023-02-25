@@ -25,8 +25,12 @@ class CreateUserForm(UserCreationForm):
         fields = ['username','email','password1','password2']
 
 
-class User_empl_Form(ModelForm):
+
+
+class UserEmplForm(ModelForm):
+    
     class Meta:
-        model: User_empl
+        model = User_empl
         fields = '__all__'
         exclude = ['user_user_emplo']
+

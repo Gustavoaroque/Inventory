@@ -22,4 +22,5 @@ urlpatterns = [
     path("client/<str:pk>/delete",views.delete_client, name='delete_pot'),
     path("lote_info/<str:pk>/payment_edit/<str:pk_pay>",views.edit_payment, name='edit_paymentt'),
     path("lote_info/<str:pk>/payment_delete/<str:pk_pay>",views.delete_payment, name='delete_payment'),
+    path("user_info/<str:pk>",views.edit_user, name='edit_user'),
 ]

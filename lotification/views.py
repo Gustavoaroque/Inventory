@@ -27,6 +27,8 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 @allowed_users(allowed_roles = ['Admin','Users'])
 def home(request):
+
+
     title = "Home"
     group = request.user.groups.all()[0].name
     clients = Clients.objects.raw('SELECT * FROM lotification_Clients LIMIT 5')
@@ -368,3 +370,24 @@ def edit_client(request, pk):
             form.save()
             return redirect('/clientes')
     return render(request, 'lotification/edit_client.html',context)
+
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['Admin','Users'])
+def edit_user(request,pk):
+    Current_user = User_empl.objects.get(id=pk)
+    # print(Current_user.user_user_emplo)
+    form_u = UserEmplForm(instance=Current_user)
+    # print(form_u)
+    context = {
+        'form': form_u,
+        'current_user':Current_user,
+    }
+    if request.method == 'POST':
+        form = UserEmplForm(request.POST ,instance=Current_user)
+        if form.is_valid():
+            print('VALID FORM')
+            form.save()
+            return redirect('home')
+    return render(request, 'lotification/User_profile.html',context)
